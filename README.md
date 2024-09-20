@@ -1,3 +1,42 @@
+# How to use google cli with this repo...
+
+Make a tmux on ur local and follow the following
+
+bash tpu_vm_setup_plain.sh
+
+```bash
+ gcloud compute tpus tpu-vm ssh SERVER_NAME --zone us-central2-b --worker=all --project  PROJECT_NAME --command 'cd EasyLM-Base && bash scripts/tpu_vm_setup_plain.sh
+```
+
+How to Free TPUs of stale tasks. do this after killing runs.  generally u shouldnt delete server. this just frees the pids....
+
+```bash
+bash scripts/free_tpus.sh --project  PROJECT_NAME --zone us-central2-b --tpu_name SERVER_NAME
+```
+
+
+How to pull ur updates. 
+
+```bash
+gcloud compute tpus tpu-vm ssh SEVER_NAME --zone us-central2-b --worker=all --project PROJECT_NAME --command 'cd EasyLM-Base && git  pull https://GITHUB_KEY@github.com/opooladz/EasyLM-Base.git'
+```
+
+How to start a run.
+
+```bash
+ gcloud compute tpus tpu-vm ssh SERVER_NAME --zone us-central2-b --worker=all --project  PROJECT_NAME --command 'export WANDB_API_KEY=YOUR_KEY && cd EasyLM-Base && nohup bash ./examples/whatever_u_wanna_run.sh  > nohup.out 2>&1 &'
+```
+
+
+To see the progress of ur run -- mostly for debugging make a new window in tmux cntrl + b : split -h <-- if you dont know tmux learn it. 
+
+```bash
+gcloud compute tpus tpu-vm ssh SERVER_NAME --zone us-central2-b --worker=0 --project PROJECT_NAME --command 'tail -f EasyLM-Base/nohup.out'
+```
+
+
+
+
 # EasyLM
 Large language models (LLMs) made easy, EasyLM is a one stop solution for
 pre-training, finetuning, evaluating and serving LLMs in JAX/Flax. EasyLM can
