@@ -18,7 +18,7 @@ bash scripts/free_tpus.sh --project  PROJECT_NAME --zone us-central2-b --tpu_nam
 How to pull ur updates. 
 
 ```bash
-gcloud compute tpus tpu-vm ssh SEVER_NAME --zone us-central2-b --worker=all --project PROJECT_NAME --command 'cd EasyLM-Base && git  pull https://GITHUB_KEY@github.com/opooladz/EasyLM-Base.git'
+gcloud compute tpus tpu-vm ssh SEVER_NAME --zone us-central2-b --worker=all --project PROJECT_NAME --command 'cd EasyLM-Base && git  pull https://github.com/opooladz/EasyLM-Base.git'
 ```
 
 How to start a run.
