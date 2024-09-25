@@ -11,6 +11,8 @@ sudo apt-get update && sudo apt-get install -y \
     p7zip-full \
     nfs-common
 
+python3 -m venv $HOME/venv
+source $HOME/venv/bin/activate
 
 # Python dependencies
 cat > $HOME/tpu_requirements.txt <<- EndOfFile
