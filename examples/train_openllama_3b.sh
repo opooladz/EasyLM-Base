@@ -24,7 +24,7 @@ python -m EasyLM.models.llama.llama_train \
     --update_llama_config='' \
     --load_dataset_state='' \
     --load_checkpoint='gs://jsg-bucket/open_llama_3b_v2_easylm/open_llama_3b_v2_easylm' \
-    --tokenizer='gs://jsg-bucket/open_llama_3b_v2_easylm' \
+    --tokenizer='openlm-research/open_llama_3b_v2' \
     --optimizer.type='adamw' \
     --optimizer.adamw_optimizer.weight_decay=0.01 \
     --optimizer.adamw_optimizer.lr=1e-3 \
