@@ -20,8 +20,8 @@ python -m EasyLM.models.llama.llama_train \
     --save_milestone_freq=50000 \
     --eval_steps 5 \
     --load_llama_config='3b' \
-    --llama.base_model='open_llama_3b_v2' \
-    --update_llama_config='' \
+    --llama.base_model='3b' \
+    --update_llama_config='hidden_size=3200,intermediate_size=8640,num_hidden_layers=26,num_attention_heads=32' \
     --load_dataset_state='' \
     --load_checkpoint='gs://jsg-bucket/open_llama_3b_v2_easylm/open_llama_3b_v2_easylm' \
     --tokenizer='openlm-research/open_llama_3b_v2' \
