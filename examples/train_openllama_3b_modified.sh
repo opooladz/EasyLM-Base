@@ -18,7 +18,7 @@ export LIBTPU_INIT_ARGS='--xla_jf_spmd_threshold_for_windowed_einsum_mib=0 --xla
 
 # Run the training script with overridden mesh_dim
 python -m EasyLM.models.llama.llama_train \
-    --mesh_dim='2,4,4' \  # Correct mesh dimensions for v4-64 pod
+    --mesh_dim='-1,8,1' \  # Correct mesh dimensions for v4-64 pod
     --dtype='bfloat16' \
     --total_steps=2000000 \
     --log_freq=500 \
