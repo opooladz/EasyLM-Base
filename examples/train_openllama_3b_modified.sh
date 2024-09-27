@@ -52,6 +52,6 @@ python -m EasyLM.models.llama.llama_train \
     --logger.online=True \
     --logger.prefix='EasyLM' \
     --logger.project="open_llama_3b_v2" \
-    --logger.output_dir="gs://jsg-bucket/LLM/easyLM/open_llama_3b_v2/experiment_output/open_llama_3b_v2-log" \
+    --logger.output_dir="/home/jaisongeorge/experiment_output/open_llama_3b_v2-log" \
     --logger.wandb_dir="/dev/shm/experiment_output/open_llama_3b_v2" \
 |& tee $HOME/output.txt
