@@ -53,5 +53,5 @@ python -m EasyLM.models.llama.llama_train \
     --logger.prefix='EasyLM' \
     --logger.project="open_llama_3b_v2" \
     --logger.output_dir="gs://jsg-bucket/LLM/easyLM/llama2_3b/experiment_output/llama3-log" \
-    --logger.wandb_dir="/dev/shm/experiment_output/open_llama_3b_v2" \ 
-    |& tee $HOME/output.txt
+    --logger.wandb_dir="/dev/shm/experiment_output/open_llama_3b_v2" \
+|& tee $HOME/output.txt
