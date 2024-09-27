@@ -6,14 +6,16 @@
 umask 000
 LEV_ROOT=$(dirname "$(readlink -f $0)")/..
 
-PYTHONPATH=${LEV_ROOT}:${LEV_ROOT}/src:${LEV_ROOT}/examples:$PYTHONPATH "$@"
+# Set up PYTHONPATH to include necessary directories
+PYTHONPATH=${LEV_ROOT}:${LEV_ROOT}/src:${LEV_ROOT}/examples:$PYTHONPATH
+export PYTHONPATH  # Ensure PYTHONPATH is exported
 
 # TPU specific flags to improve training throughput
 export LIBTPU_INIT_ARGS='--xla_jf_spmd_threshold_for_windowed_einsum_mib=0 --xla_tpu_spmd_threshold_for_allgather_cse=10000 --xla_enable_async_all_gather=true --xla_tpu_enable_latency_hiding_scheduler=true TPU_MEGACORE=MEGACORE_DENSE'
 
-
+# Run the training script
 python -m EasyLM.models.llama.llama_train \
-    --mesh_dim='-1,8,1' \   # Adjust according to TPU mesh
+    --mesh_dim='-1,8,1' \
     --dtype='bfloat16' \
     --total_steps=2000000 \
     --log_freq=500 \
@@ -21,8 +23,8 @@ python -m EasyLM.models.llama.llama_train \
     --save_milestone_freq=50000 \
     --eval_steps=5 \
     --llama.base_model='llama2_3b' \
-    --update_llama_config='hidden_size=3200,intermediate_size=8640,num_hidden_layers=26,num_attention_heads=32' \  # Keep as is
-    --load_checkpoint='/home/jaisongeorge/EasyLM-Base/open_llama_3b_v2_easylm' \   # Adjust to your mounted path
+    --update_llama_config='hidden_size=3200,intermediate_size=8640,num_hidden_layers=26,num_attention_heads=32' \
+    --load_checkpoint='/home/jaisongeorge/EasyLM-Base/open_llama_3b_v2_easylm' \
     --tokenizer='openlm-research/open_llama_3b_v2' \
     --optimizer.type='adamw' \
     --optimizer.adamw_optimizer.weight_decay=0.01 \
@@ -32,10 +34,10 @@ python -m EasyLM.models.llama.llama_train \
     --optimizer.adamw_optimizer.lr_decay_steps=250000 \
     --train_dataset.type='huggingface' \
     --train_dataset.text_processor.fields='text' \
-    --train_dataset.huggingface_dataset.path='HuggingFaceFW/fineweb-edu' \   # This dataset looks good
+    --train_dataset.huggingface_dataset.path='HuggingFaceFW/fineweb-edu' \
     --train_dataset.huggingface_dataset.streaming=True \
     --train_dataset.huggingface_dataset.seq_length=2048 \
-    --train_dataset.huggingface_dataset.batch_size=256 \   # Adjusted for TPU v4-64
+    --train_dataset.huggingface_dataset.batch_size=256 \
     --train_dataset.huggingface_dataset.split='train' \
     --train_dataset.huggingface_dataset.name='sample-100BT' \
     --eval_dataset.type='huggingface' \
