@@ -24,6 +24,8 @@ python -m EasyLM.models.llama.llama_train \
     --eval_steps=5 \
     --load_llama_config='3b' \
     --llama.base_model='llama2_3b' \
+    --update_llama_config='' \
+    --load_dataset_state='' \
     --load_checkpoint='params::gs://jsg-bucket/open_llama_3b_v2_easylm/open_llama_3b_v2_easylm' \
     --tokenizer='openlm-research/open_llama_3b_v2' \
     --optimizer.type='adamw' \
@@ -37,7 +39,7 @@ python -m EasyLM.models.llama.llama_train \
     --train_dataset.huggingface_dataset.path='HuggingFaceFW/fineweb-edu' \
     --train_dataset.huggingface_dataset.streaming=True \
     --train_dataset.huggingface_dataset.seq_length=2048 \
-    --train_dataset.huggingface_dataset.batch_size=256 \
+    --train_dataset.huggingface_dataset.batch_size=128 \
     --train_dataset.huggingface_dataset.split='train' \
     --train_dataset.huggingface_dataset.name='sample-100BT' \
     --eval_dataset.type='huggingface' \
