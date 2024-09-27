@@ -18,7 +18,7 @@ export LIBTPU_INIT_ARGS='--xla_jf_spmd_threshold_for_windowed_einsum_mib=0 --xla
 
 # Run the training script with overridden mesh_dim
 python -m EasyLM.models.llama.llama_train \
-    --mesh_dim='-1,8,1' \  # Correct mesh dimensions for v4-64 pod
+    --mesh_dim='-1,8,1' \
     --dtype='bfloat16' \
     --total_steps=2000000 \
     --log_freq=500 \
@@ -27,8 +27,8 @@ python -m EasyLM.models.llama.llama_train \
     --eval_steps=5 \
     --load_llama_config='3b' \
     --llama.base_model='llama2_3b' \
-    --load_checkpoint='/home/jaisongeorge/EasyLM-Base/open_llama_3b_v2_easylm/open_llama_3b_v2_easylm' \
-    --tokenizer='/home/jaisongeorge/EasyLM-Base/open_llama_3b_v2_easylm/tokenizer.model' \
+    --load_checkpoint='params::gs://jsg-bucket/open_llama_3b_v2_easylm/open_llama_3b_v2_easylm' \
+    --tokenizer='openlm-research/open_llama_3b_v2' \
     --optimizer.type='adamw' \
     --optimizer.adamw_optimizer.weight_decay=0.01 \
     --optimizer.adamw_optimizer.lr=1e-3 \
@@ -55,7 +55,6 @@ python -m EasyLM.models.llama.llama_train \
     --logger.online=True \
     --logger.prefix='EasyLM' \
     --logger.project="open_llama_3b_v2" \
-    --logger.output_dir="/mnt/bucket/LLM/easyLM/open_llama_3b_v2/experiment_output/open_llama_3b_v2-log" \
+    --logger.output_dir="gs://jsg-bucket/LLM/easyLM/llama2_3b/experiment_output/llama3-log" \
     --logger.wandb_dir="/dev/shm/experiment_output/open_llama_3b_v2" \ 
-    
     |& tee $HOME/output.txt
