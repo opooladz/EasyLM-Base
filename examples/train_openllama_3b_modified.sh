@@ -7,7 +7,7 @@ umask 000
 LEV_ROOT=$(dirname "$(readlink -f $0)")/..
 
 # Set up PYTHONPATH to include necessary directories
-PYTHONPATH=${LEV_ROOT}:${LEV_ROOT}/src:${LEV_ROOT}/examples:$PYTHONPATH
+PYTHONPATH=${LEV_ROOT}:${LEV_ROOT}/src:${LEV_ROOT}/examples:$PYTHONPATH "$@"
 export PYTHONPATH  # Ensure PYTHONPATH is exported
 
 # TPU specific flags to improve training throughput

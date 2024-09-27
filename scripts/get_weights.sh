@@ -11,14 +11,14 @@ wget https://huggingface.co/openlm-research/open_llama_3b_v2_easylm/resolve/main
 if [ $? -eq 0 ]; then
     echo "Download complete!"
     
-    # Upload the file to your GCS bucket
-    gsutil cp open_llama_3b_v2_easylm gs://jsg-bucket/open_llama_3b_v2_easylm/
+    # Move the file to your GCS bucket (move instead of copy)
+    gsutil mv open_llama_3b_v2_easylm gs://jsg-bucket/open_llama_3b_v2_easylm/
     
-    # Check if the upload was successful
+    # Check if the move was successful
     if [ $? -eq 0 ]; then
-        echo "Upload to GCS complete!"
+        echo "Move to GCS complete! File removed from local VM."
     else
-        echo "Failed to upload to GCS."
+        echo "Failed to move to GCS."
     fi
 else
     echo "Download failed."
