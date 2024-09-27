@@ -13,17 +13,17 @@ export PYTHONPATH  # Ensure PYTHONPATH is exported
 # TPU specific flags to improve training throughput
 export LIBTPU_INIT_ARGS='--xla_jf_spmd_threshold_for_windowed_einsum_mib=0 --xla_tpu_spmd_threshold_for_allgather_cse=10000 --xla_enable_async_all_gather=true --xla_tpu_enable_latency_hiding_scheduler=true TPU_MEGACORE=MEGACORE_DENSE'
 
-# Run the training script
+# Run the training script with overridden mesh_dim
 python -m EasyLM.models.llama.llama_train \
-    --mesh_dim='2,4,4' \  # Correct mesh dimensions for v4-64 pod with 2x4x4 topology
+    --mesh_dim='2,4,4' \  # Correct mesh dimensions for v4-64 pod
     --dtype='bfloat16' \
     --total_steps=2000000 \
     --log_freq=500 \
     --save_model_freq=5000 \
     --save_milestone_freq=50000 \
     --eval_steps=5 \
+    --load_llama_config='3b' \
     --llama.base_model='llama2_3b' \
-    --update_llama_config='hidden_size=3200,intermediate_size=8640,num_hidden_layers=26,num_attention_heads=32' \
     --load_checkpoint='/home/jaisongeorge/EasyLM-Base/open_llama_3b_v2_easylm' \
     --tokenizer='openlm-research/open_llama_3b_v2' \
     --optimizer.type='adamw' \
@@ -33,7 +33,7 @@ python -m EasyLM.models.llama.llama_train \
     --optimizer.adamw_optimizer.lr_warmup_steps=0 \
     --optimizer.adamw_optimizer.lr_decay_steps=250000 \
     --train_dataset.type='huggingface' \
-    --train_dataset.text_processor.fields='text' \
+    --train_dataset.text_processor.fields='text' \ 
     --train_dataset.huggingface_dataset.path='HuggingFaceFW/fineweb-edu' \
     --train_dataset.huggingface_dataset.streaming=True \
     --train_dataset.huggingface_dataset.seq_length=2048 \
