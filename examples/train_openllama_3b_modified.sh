@@ -10,6 +10,9 @@ LEV_ROOT=$(dirname "$(readlink -f $0)")/..
 PYTHONPATH=${LEV_ROOT}:${LEV_ROOT}/src:${LEV_ROOT}/examples:$PYTHONPATH
 export PYTHONPATH  # Ensure PYTHONPATH is exported
 
+# Automatically select TPU backend if available
+export JAX_PLATFORMS=''
+
 # TPU specific flags to improve training throughput
 export LIBTPU_INIT_ARGS='--xla_jf_spmd_threshold_for_windowed_einsum_mib=0 --xla_tpu_spmd_threshold_for_allgather_cse=10000 --xla_enable_async_all_gather=true --xla_tpu_enable_latency_hiding_scheduler=true TPU_MEGACORE=MEGACORE_DENSE'
 
@@ -24,8 +27,8 @@ python -m EasyLM.models.llama.llama_train \
     --eval_steps=5 \
     --load_llama_config='3b' \
     --llama.base_model='llama2_3b' \
-    --load_checkpoint='/home/jaisongeorge/EasyLM-Base/open_llama_3b_v2_easylm' \
-    --tokenizer='openlm-research/open_llama_3b_v2' \
+    --load_checkpoint='/home/jaisongeorge/EasyLM-Base/open_llama_3b_v2_easylm/open_llama_3b_v2_easylm' \
+    --tokenizer='/home/jaisongeorge/EasyLM-Base/open_llama_3b_v2_easylm/tokenizer.model' \
     --optimizer.type='adamw' \
     --optimizer.adamw_optimizer.weight_decay=0.01 \
     --optimizer.adamw_optimizer.lr=1e-3 \
@@ -33,7 +36,7 @@ python -m EasyLM.models.llama.llama_train \
     --optimizer.adamw_optimizer.lr_warmup_steps=0 \
     --optimizer.adamw_optimizer.lr_decay_steps=250000 \
     --train_dataset.type='huggingface' \
-    --train_dataset.text_processor.fields='text' \ 
+    --train_dataset.text_processor.fields='text' \
     --train_dataset.huggingface_dataset.path='HuggingFaceFW/fineweb-edu' \
     --train_dataset.huggingface_dataset.streaming=True \
     --train_dataset.huggingface_dataset.seq_length=2048 \
@@ -52,6 +55,5 @@ python -m EasyLM.models.llama.llama_train \
     --logger.online=True \
     --logger.prefix='EasyLM' \
     --logger.project="open_llama_3b_v2" \
-    --logger.output_dir="/home/jaisongeorge/experiment_output/open_llama_3b_v2-log" \
-    --logger.wandb_dir="/dev/shm/experiment_output/open_llama_3b_v2" \
-|& tee $HOME/output.txt
+    --logger.output_dir="/mnt/bucket/LLM/easyLM/open_llama_3b_v2/experiment_output/open_llama_3b_v2-log" \
+    --logger.wandb_dir="/dev/shm/experiment_output/open_llama_3b_v2" |& tee $HOME/output.txt
