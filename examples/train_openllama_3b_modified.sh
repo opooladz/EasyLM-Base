@@ -10,9 +10,6 @@ LEV_ROOT=$(dirname "$(readlink -f $0)")/..
 PYTHONPATH=${LEV_ROOT}:${LEV_ROOT}/src:${LEV_ROOT}/examples:$PYTHONPATH
 export PYTHONPATH  # Ensure PYTHONPATH is exported
 
-# Automatically select TPU backend if available
-export JAX_PLATFORMS=''
-
 # TPU specific flags to improve training throughput
 export LIBTPU_INIT_ARGS='--xla_jf_spmd_threshold_for_windowed_einsum_mib=0 --xla_tpu_spmd_threshold_for_allgather_cse=10000 --xla_enable_async_all_gather=true --xla_tpu_enable_latency_hiding_scheduler=true TPU_MEGACORE=MEGACORE_DENSE'
 
