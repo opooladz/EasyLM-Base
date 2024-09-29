@@ -22,7 +22,7 @@ python -m EasyLM.models.llama.llama_train \
     --save_milestone_freq=50000 \
     --eval_steps=5 \
     --load_llama_config='3b' \
-    --llama.base_model='llama2_3b' \
+    --llama.base_model='llama_3b' \
     --update_llama_config='' \
     --load_dataset_state='' \
     --load_checkpoint='params::gs://jsg-bucket/open_llama_3b_v2_easylm/open_llama_3b_v2_easylm' \
