@@ -25,7 +25,7 @@ python -m EasyLM.models.llama.llama_train \
     --llama.base_model='llama2_3b' \
     --update_llama_config='' \
     --load_dataset_state='' \
-    --load_checkpoint='params::gs://jsg-bucket/LLM/easyLM/llama2_3b/experiment_output/llama3-log/c1342ca367bc439095c2f629c88ff561/streaming_train_state_100000' \
+    --load_checkpoint='params::gs://jsg-bucket/LLM/easyLM/llama2_3b/experiment_output/llama3-log/c1342ca367bc439095c2f629c88ff561/streaming_train_state' \
     --tokenizer='openlm-research/open_llama_3b_v2' \
     --optimizer.type='adamw' \
     --optimizer.adamw_optimizer.weight_decay=0.01 \
