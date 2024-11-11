@@ -7,7 +7,7 @@
 umask 000
 LEV_ROOT=$(dirname "$(readlink -f $0)")/..
 
-
+source ~/venv/bin/activate
 
 PYTHONPATH=${LEV_ROOT}:${LEV_ROOT}/src:${LEV_ROOT}/examples:$PYTHONPATH "$@"
 
@@ -21,7 +21,6 @@ PYTHONPATH=${LEV_ROOT}:${LEV_ROOT}/src:${LEV_ROOT}/examples:$PYTHONPATH "$@"
 # TPU specific flags to improve training throughput
 export LIBTPU_INIT_ARGS='--xla_jf_spmd_threshold_for_windowed_einsum_mib=0 --xla_tpu_spmd_threshold_for_allgather_cse=10000 --xla_enable_async_all_gather=true --xla_tpu_enable_latency_hiding_scheduler=true TPU_MEGACORE=MEGACORE_DENSE'
 
-
 python -m EasyLM.models.llama.llama_train \
     --mesh_dim='-1,8,1' \
     --dtype='bfloat16' \
@@ -34,7 +33,7 @@ python -m EasyLM.models.llama.llama_train \
     --llama.base_model='llama2_3b' \
     --update_llama_config='' \
     --load_dataset_state='' \
-    --load_checkpoint='params::gs://jsg-bucket/OpenLLaMA/open_llama_3b_v2_easylm' \
+    --load_checkpoint='params::gs://jsg-bucket/OpenLLaMA/open_llama2_3b_v2_easylm' \
     --tokenizer='openlm-research/open_llama_3b_v2' \
     --optimizer.type='adamw' \
     --optimizer.adamw_optimizer.weight_decay=1e-6 \
