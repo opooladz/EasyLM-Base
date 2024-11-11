@@ -63,7 +63,4 @@ python -m EasyLM.models.llama.llama_train \
     --logger.project="open_llama2_3b" \
     --logger.output_dir="gs://jsg-bucket/LLM/easyLM/llama2_3b/experiment_output/llama3-log" \
     --logger.wandb_dir="/dev/shm/experiment_output/open_llama2_3b" \
-    --q=2 \
-    --starting_q=None \
-    --q_decay_steps=10000 \
 |& tee $HOME/output.txt
