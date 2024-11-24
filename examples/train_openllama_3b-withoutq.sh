@@ -33,7 +33,7 @@ python -m EasyLM.models.llama.llama_train \
     --llama.base_model='llama2_3b' \
     --update_llama_config='' \
     --load_dataset_state='' \
-    --load_checkpoint='trainstate_params::gs://jsg-bucket/LLM/easyLM/llama2_3b/experiment_output/llama3-log/52d7602c3a2e4fb19050c5ff5df12aac/streaming_train_state' \
+    --load_checkpoint='trainstate_params::gs://jsg-bucket/LLM/easyLM/llama2_3b/experiment_output/llama3-log/020dde1f9ea5464981aa022d89d09cff/streaming_train_state' \
     --tokenizer='openlm-research/open_llama_3b_v2' \
     --optimizer.type='adamw' \
     --optimizer.adamw_optimizer.weight_decay=1e-6 \
