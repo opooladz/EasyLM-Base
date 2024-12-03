@@ -37,7 +37,7 @@ python -m EasyLM.models.llama.llama_train \
     --tokenizer='openlm-research/open_llama_3b_v2' \
     --optimizer.type='adamw' \
     --optimizer.adamw_optimizer.weight_decay=1e-6 \
-    --optimizer.adamw_optimizer.lr=1e-5 \
+    --optimizer.adamw_optimizer.lr=1e-3 \
     --optimizer.adamw_optimizer.end_lr=1e-5 \
     --optimizer.adamw_optimizer.lr_warmup_steps=0 \
     --optimizer.adamw_optimizer.lr_decay_steps=2000000 \
