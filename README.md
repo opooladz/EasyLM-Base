@@ -5,7 +5,7 @@ Make a tmux on ur local and follow the following
 bash tpu_vm_setup.sh
 
 ```bash
- gcloud compute tpus tpu-vm ssh SERVER_NAME --zone us-central2-b --worker=all --project  PROJECT_NAME --command 'cd EasyLM-Base && bash scripts/tpu_vm_setup.sh'
+ gcloud compute tpus tpu-vm ssh SERVER_NAME --zone us-central2-b --worker=all --project  PROJECT_NAME --command 'cd EasyLM-Base && bash scripts/vm_setup_plain.sh'
 ```
 
 How to Free TPUs of stale tasks. do this after killing runs.  generally u shouldnt delete server. this just frees the pids....
