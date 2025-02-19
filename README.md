@@ -18,7 +18,7 @@ bash scripts/free_tpus.sh --project  PROJECT_NAME --zone us-central2-b --tpu_nam
 Delete TPU Lock Files -- get rid of annoying warning wall 
 
 ```bash
-bash scripts/delete_tpu_lockfile.sh --project  PROJECT_NAME --zone us-central2-b --tpu_name SERVER_NAME
+ gcloud compute tpus tpu-vm ssh SERVER_NAME --zone us-central2-b --worker=all --project  PROJECT_NAME --command 'cd EasyLM-Base && bash scripts/delete_tpu_lockfile.sh'
 ```
 
 How to pull ur updates. 
