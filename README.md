@@ -15,6 +15,12 @@ bash scripts/free_tpus.sh --project  PROJECT_NAME --zone us-central2-b --tpu_nam
 ```
 
 
+Delete TPU Lock Files -- get rid of annoying warning wall 
+
+```bash
+bash scripts/delete_tpu_lockfile.sh --project  PROJECT_NAME --zone us-central2-b --tpu_name SERVER_NAME
+```
+
 How to pull ur updates. 
 
 ```bash
