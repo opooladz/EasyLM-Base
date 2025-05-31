@@ -17,6 +17,8 @@ sudo find /var/log -type f -name "*.log" -exec truncate -s 0 {} \;
 echo "[*] Vacuuming journal logs to 50MB cap..."
 sudo journalctl --vacuum-size=50M
 
+sudo docker system prune -af --volumes
+
 echo "[*] Setting Snap retention to 2 revisions..."
 sudo snap set system refresh.retain=2
 
